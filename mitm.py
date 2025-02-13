@@ -24,12 +24,11 @@ hEveA = hashlib.sha512(int.to_bytes(sEveKeyA, length=1024, byteorder='big')).hex
 hEveB = hashlib.sha512(int.to_bytes(sEveKeyB, length=1024, byteorder='big')).hexdigest()
 
 if hA == hB:
-    print("Alice y Bob tienen la misma clave")
+    print("Alice y Bob tienen la misma clave (como debería ser sin MITM)")
 else:
-    print("Alice y Bob tienen claves distintas")
+    print("Alice y Bob tienen claves distintas (MITM)")
 
-if hA == hEveA:
-    print("Alice y Eve tienen la misma clave")
-
-if hB == hEveB:
-    print("Bob y Eve tienen la misma clave")
+if hA == hEveA and hB == hEveB:
+    print("MITM exitoso: Eve tiene las mismas claves que Alice y Bob")
+else:
+    print("MITM fallido: Eve no tiene las mismas claves que Alice y Bob")
